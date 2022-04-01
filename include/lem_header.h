@@ -26,7 +26,7 @@ typedef struct ptrs_room {
 } ptrs_room;
 
 typedef struct node_room {
-    ptrs_room *list_tunnels;
+    ptrs_room *tunnel;
     int nmb_tunnels;
     int fourmi;
 } node_room;
@@ -38,6 +38,8 @@ typedef struct node_room {
 node_room *new_node_empty (void);
 
 void connect_node (node_room *room1, node_room *room2);
+
+void free_node_and_his_tunnels (node_room *room);
 
 // main
 

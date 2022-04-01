@@ -15,17 +15,6 @@
 #define SYNTAX_ERROR_MSG "syntax error"
 #define ERROR_MSG  "error"
 
-typedef struct formats_str {
-    int b_plus;
-    int b_diez;
-    int b_zero;
-    int b_number;
-    int b_minus;
-    int b_space;
-    int b_point;
-    int error;
-} formats_str;
-
 void free_my_arr (char **arr);
 
 int my_arraylen (char ** world);
