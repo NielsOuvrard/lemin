@@ -43,7 +43,10 @@ int swich_to_funct (va_list *list, char c)
             return flag_d(list);
         case 'c':
             return flag_c(list);
+        default:
+            return 0;
     }
+    return 0;
 }
 
 int my_printf (char * str, ... )
