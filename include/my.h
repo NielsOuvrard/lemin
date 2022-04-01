@@ -95,7 +95,3 @@ int my_strlen(char const *str);
 char *my_strupcase(char *str);
 
 int my_unsintlen (unsigned int nbr);
-
-int nbsize(int tmp);
-
-char *nbtstr (int tmp);
