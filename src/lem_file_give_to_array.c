@@ -25,17 +25,15 @@ char **augmente_size_array (char **map, char *str)
 {
     int len_array = my_arraylen(map);
     int len_str = 512;
-    char **tmp = malloc(sizeof(char *) * (len_array + 2));
+    char **array = malloc(sizeof(char *) * (len_array + 2));
     int i;
-    for (i = 0; i < len_array; i++) {
-        tmp[i] = malloc(sizeof(char) * len_str);
-        my_memset(tmp[i], len_str - 1, '\0');
-        my_strcpy(tmp[i], map[i]);
-    }
+    for (i = 0; i < len_array; i++)
+        array[i] = map[i];
     free(map);
-    tmp[len_array] = str;
-    tmp[len_array + 1] = NULL;
-    return tmp;
+    array[len_array] = str;
+    array[len_array + 1] = NULL;
+    str[my_strlen(str) - 1] = '\0';
+    return array;
 }
 
 char **file_give_to_array ()
@@ -43,9 +41,7 @@ char **file_give_to_array ()
     char **array = malloc(sizeof(char *));
     array[0] = NULL;
     char *str;
-    while ((str = my_scanf())) {
-        my_putstr(str);
+    while ((str = my_scanf()))
         array = augmente_size_array(array, str);
-    }
     return array;
 }

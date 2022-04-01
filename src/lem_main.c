@@ -39,6 +39,7 @@ int lem_in (void)
 
     free_node_and_his_tunnels(room1);
     free_node_and_his_tunnels(room2);
+    free_node_and_his_tunnels(room3);
     return 0;
 }
 
