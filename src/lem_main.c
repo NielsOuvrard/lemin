@@ -8,7 +8,6 @@
 #include "my.h"
 #include "lem_header.h"
 
-
 int lem_in (void)
 {
     // ./lem_in < anthill_trivial
@@ -28,14 +27,14 @@ int lem_in (void)
     room1->fourmi = 19;
     room2->fourmi = 25;
     room3->fourmi = 31;
-    my_printf("nmb fourmis room1->tunnel[0].room->fourmi : %d\n", room1->tunnel[0].room->fourmi);
+    my_printf("nmb fourmis room1->tunnel[0].room->fourmi : %d\n", room1->tunnel[0]->fourmi);
     my_printf("nmb fourmis room2 : %d\n", room2->fourmi);
 
-    my_printf("nmb fourmis room2->tunnel[1].room : %d \n",
-    room2->tunnel[1].room->fourmi);
+    my_printf("nmb fourmis room2->tunnel[1] : %d \n",
+    room2->tunnel[1]->fourmi);
 
-    my_printf("nmb fourmis room2->tunnel[0].room : %d \n",
-    room2->tunnel[0].room->fourmi);
+    my_printf("nmb fourmis room2->tunnel[0] : %d \n",
+    room2->tunnel[0]->fourmi);
 
     free_node_and_his_tunnels(room1);
     free_node_and_his_tunnels(room2);

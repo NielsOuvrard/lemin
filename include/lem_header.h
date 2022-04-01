@@ -20,13 +20,8 @@
 
 #define BUFF_SIZE 512
 
-
-typedef struct ptrs_room {
-    struct node_room *room;
-} ptrs_room;
-
 typedef struct node_room {
-    ptrs_room *tunnel;
+    struct node_room **tunnel;
     int nmb_tunnels;
     int fourmi;
 } node_room;
