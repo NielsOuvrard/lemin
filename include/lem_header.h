@@ -25,3 +25,7 @@
 // main
 
 int main (int ac, char **av);
+
+// file give to array
+
+char **file_give_to_array ();
