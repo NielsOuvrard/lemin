@@ -6,11 +6,18 @@
 */
 #pragma once
 
-#include <stdlib.h>
-#include <time.h>
+// read, write, malloc, free and getline.
+
+// read
+#include <sys/types.h>
+#include <sys/uio.h>
+// write && read
 #include <unistd.h>
-#include <fcntl.h>
-#include <math.h>
+// malloc
+#include <stdlib.h>
+// getline
+#include <stdio.h>
+// bool
 #include <stdbool.h>
 
 #define BUFF_SIZE 512
