@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "lem_header.h": "c"
+        "lem_header.h": "c",
+        "my.h": "c"
     }
 }
