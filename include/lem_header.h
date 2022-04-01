@@ -6,14 +6,12 @@
 */
 #pragma once
 
-// read, write, malloc, free and getline.
-
 // read
 #include <sys/types.h>
 #include <sys/uio.h>
 // write && read
 #include <unistd.h>
-// malloc
+// malloc / free
 #include <stdlib.h>
 // getline
 #include <stdio.h>
