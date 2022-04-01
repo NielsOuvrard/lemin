@@ -23,3 +23,7 @@
 #define BUFF_SIZE 512
 
 // * ////////////// SRC DIR //////////////////////////////////////////
+
+// main
+
+int main (int ac, char **av);
