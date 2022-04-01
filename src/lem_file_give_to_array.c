@@ -32,6 +32,7 @@ char **augmente_size_array (char **map, char *str)
         my_memset(tmp[i], len_str - 1, '\0');
         my_strcpy(tmp[i], map[i]);
     }
+    free(map);
     tmp[len_array] = str;
     tmp[len_array + 1] = NULL;
     return tmp;
@@ -44,7 +45,7 @@ char **file_give_to_array ()
     char *str;
     while ((str = my_scanf())) {
         my_putstr(str);
-        augmente_size_array(array, str);
+        array = augmente_size_array(array, str);
     }
     return array;
 }
