@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2021
-** header du RPG
+** header du lem-in
 ** File description:
 ** bcp de definitions
 */
