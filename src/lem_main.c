@@ -24,15 +24,8 @@ int lem_in (void)
     node_room *room2 = new_node_empty();
     connect_node(room1, room2);
     room2->fourmi = 35;
-    my_putstr(" nmb fourmis room1->list_tunnels[0].room->fourmi :\n");
-    my_putint(room1->list_tunnels[0].room->fourmi);
-    my_putstr("\n");
-
-
-    my_putstr(" nmb fourmis room2 :\n");
-    my_putint(room2->fourmi);
-    my_putstr("\n");
-
+    my_printf(" nmb fourmis room1->list_tunnels[0].room->fourmi : %d\n %c", room1->list_tunnels[0].room->fourmi, 'a');
+    my_printf(" nmb fourmis room2 : %d\n", room2->fourmi);
     free_node_and_his_tunnels(room1);
     free_node_and_his_tunnels(room2);
     return 0;

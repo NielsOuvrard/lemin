@@ -40,8 +40,8 @@ push:
 		@git push
 
 mac_del:
-		rm *.dSYM
-		rm .vscode
+		rm -R *.dSYM
+		rm -R .vscode
 		rm .DS_Store
 		rm src/.DS_Store
 
