@@ -20,7 +20,24 @@
 
 #define BUFF_SIZE 512
 
+
+typedef struct ptrs_room {
+    struct node_room *room;
+} ptrs_room;
+
+typedef struct node_room {
+    ptrs_room *list_tunnels;
+    int nmb_tunnels;
+    int fourmi;
+} node_room;
+
 // * ////////////// SRC DIR //////////////////////////////////////////
+
+// create node
+
+node_room *new_node_empty (void);
+
+void connect_node (node_room *room1, node_room *room2);
 
 // main
 
