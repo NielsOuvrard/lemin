@@ -21,16 +21,23 @@
 #define BUFF_SIZE 512
 
 typedef struct node_room {
-    struct node_room **tunnel;
+    // ? nmb tunnels ou dernier element null ?
     int nmb_tunnels;
+    struct node_room **tunnel;
     int fourmi;
+    int pos_x;
+    int pos_y;
+    char *name;
 } node_room;
 
 // * ////////////// SRC DIR //////////////////////////////////////////
+// complete according to file
+
+node_room **complete_according_to_file (char **file, int *a);
 
 // create node
 
-node_room *new_node_empty (void);
+node_room *new_node_empty (char *name, int x, int y);
 
 void connect_node (node_room *room1, node_room *room2);
 

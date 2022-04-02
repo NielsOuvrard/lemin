@@ -8,20 +8,14 @@
 #include "my.h"
 #include "lem_header.h"
 
-int lem_in (void)
+void test_rooms (void)
 {
-    // ./lem_in < anthill_trivial
-    char **array = file_give_to_array();
-    my_show_word_array(array);
-    free_my_arr(array);
-
-    node_room *room1 = new_node_empty();
-    node_room *room2 = new_node_empty();
+    node_room *room1 = new_node_empty("name", 0, 0);
+    node_room *room2 = new_node_empty("name", 0, 0);
     my_putstr("\non connect room1 - room2\n");
     connect_node(room1, room2);
 
-
-    node_room *room3 = new_node_empty();
+    node_room *room3 = new_node_empty("name", 0, 0);
     my_putstr("on connect room2 - room3\n");
     connect_node(room2, room3);
     room1->fourmi = 19;
@@ -39,6 +33,18 @@ int lem_in (void)
     free_node_and_his_tunnels(room1);
     free_node_and_his_tunnels(room2);
     free_node_and_his_tunnels(room3);
+}
+
+int lem_in (void)
+{
+    // ./lem_in < anthill_trivial
+    char **array = file_give_to_array();
+    my_show_word_array(array);
+    int imb_rooms;
+    node_room **rooms = complete_according_to_file(array, &imb_rooms);
+
+    free_my_arr(array);
+    // test_rooms();
     return 0;
 }
 

@@ -8,12 +8,15 @@
 #include "my.h"
 #include "lem_header.h"
 
-node_room *new_node_empty (void)
+node_room *new_node_empty (char *name, int x, int y)
 {
     node_room *node = malloc(sizeof(node_room));
     node->fourmi = 0;
     node->tunnel = NULL;
     node->nmb_tunnels = 0;
+    node->name = name;
+    node->pos_x = x;
+    node->pos_y = y;
     return node;
 }
 

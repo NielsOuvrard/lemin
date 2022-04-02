@@ -43,7 +43,7 @@ int my_longlen (long nbr);
 
 char *my_lowercase (char *str);
 
-char *my_memset(char *str, int len, char value);
+char *my_memset (char *str, char value, int len);
 
 int my_printf (char * str, ...);
 

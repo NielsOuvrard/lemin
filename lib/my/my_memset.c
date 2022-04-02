@@ -5,7 +5,7 @@
 ** set in memory of str
 */
 
-char *my_memset (char *str, int len, char value)
+char *my_memset (char *str, char value, int len)
 {
     for (int i = 0; i < len; i++)
         str[i] = value;
