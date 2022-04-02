@@ -71,21 +71,22 @@ void connect_node_with_str (node_room **all_rooms, char *str, int nmb_rooms)
 {
     int size_str = my_strlen(str) + 1, i = 0, j;
     char *room1_name = malloc(sizeof(char) * size_str);
-    my_memset(room1_name, size_str, '\0');
+    my_memset(room1_name, '\0', size_str);
     for (j = 0; str[j] && str[j] != '-'; j++) {
         room1_name[i++] = str[j];
     }
     str += j + 1;
     node_room *room1 = NULL;
     for (int a = 0; a < nmb_rooms; a++) {
-        // my_printf("on check %s avec %s\n", room1_name, all_rooms[a]->name);
+        // my_printf("on check %s\n", room1_name);
+        // my_printf("avec %s\n", all_rooms[a]->name);
         if (!my_strvcmp(room1_name, all_rooms[a]->name)) {
             room1 = all_rooms[a];
             break;
         }
     }
     char *room2_name = malloc(sizeof(char) * size_str);
-    my_memset(room2_name, size_str, '\0');
+    my_memset(room2_name, '\0', size_str);
     i = 0;
     for (j = 0; str[j] && str[j] != '-'; j++) {
         room2_name[i] = str[j];
@@ -122,7 +123,7 @@ node_room **complete_according_to_file (char **file, int *nmb_rooms)
         else if (file_type == 2)
             break;
     }
-    // my_printf("\nnmb de rooms : %d\n", (*nmb_rooms));
+    my_printf("\nnmb de rooms : %d\n", (*nmb_rooms));
     int connections = 0;
     for (i = i; file[i]; i++) {
         if ((file_type = is_a_tunnel(file[i]))) {
@@ -131,8 +132,7 @@ node_room **complete_according_to_file (char **file, int *nmb_rooms)
             connections++;
         }
     }
-    // my_printf("\nnmb de tunnels : %d\n", connections);
-    // my_printf("\nend : %s\nstart : %s\n", end, start);
+    my_printf("\nnmb de tunnels : %d\n", connections);
     return all_rooms;
 }
 
