@@ -57,7 +57,7 @@ char *cur_name(char *str);
 
 char *get_name(char **arr, char *str);
 
-void add_type(node_room **rooms, char **arr);
+void add_type(node_room **rooms, char **arr, int nmb_room);
 
 // main
 
