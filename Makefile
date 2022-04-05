@@ -31,7 +31,7 @@ fclean: clean
 re:	fclean all
 
 auteur:
-	@echo $(USER) is the best
+		@echo $(USER) is the best
 
 push:
 		@git add .
