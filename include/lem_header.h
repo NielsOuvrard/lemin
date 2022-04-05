@@ -23,6 +23,7 @@
 typedef struct node_room {
     // ? nmb tunnels ou dernier element null ?
     int nmb_tunnels;
+    int type;
     struct node_room **tunnel;
     int fourmi;
     int pos_x;

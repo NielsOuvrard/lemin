@@ -8,44 +8,72 @@
 #include "my.h"
 #include "lem_header.h"
 
-void test_rooms (void)
+int get_nbrspe(char *yes, int *x)
 {
-    node_room *room1 = new_node_empty("name", 0, 0);
-    node_room *room2 = new_node_empty("name", 0, 0);
-    my_putstr("\non connect room1 - room2\n");
-    connect_node(room1, room2);
-
-    node_room *room3 = new_node_empty("name", 0, 0);
-    my_putstr("on connect room2 - room3\n");
-    connect_node(room2, room3);
-    room1->fourmi = 19;
-    room2->fourmi = 25;
-    room3->fourmi = 31;
-    my_printf("nmb fourmis room1->tunnel[0].room->fourmi : %d\n", room1->tunnel[0]->fourmi);
-    my_printf("nmb fourmis room2 : %d\n", room2->fourmi);
-
-    my_printf("nmb fourmis room2->tunnel[1] : %d \n",
-    room2->tunnel[1]->fourmi);
-
-    my_printf("nmb fourmis room2->tunnel[0] : %d \n",
-    room2->tunnel[0]->fourmi);
-
-    free_node_and_his_tunnels(room1);
-    free_node_and_his_tunnels(room2);
-    free_node_and_his_tunnels(room3);
+    int res = 0, neg = 1;
+    if (yes[*x] == '-') {
+        neg = -1;
+        (*x)++;
+    }
+    while (yes[*x] >= '0' && yes[*x] <= '9') {
+        res = res * 10;
+        res = res + (yes[*x] - 48);
+        (*x)++;
+    }
+    res = res * neg;
+    return res;
 }
 
-int lem_in (void)
+char *cur_name(char *str)
+{   int x = 0, w = 0;
+    for (; str[x] != ' '; x++);
+    char *yes = malloc(sizeof (char) * (x + 1));
+    for (; str[w] != ' '; w++)
+        yes[w] = str[w];
+    yes[w] = '\0';
+    return yes;
+}
+
+char *get_name(char **arr, char *str)
+{
+    for (int x = 0; arr[x] != NULL ; x++) {
+        if (my_strcmp(str, arr[x]) == 0) {
+            return cur_name(arr[x + 1]);
+        }
+    }
+}
+
+void add_type(node_room **rooms, char **arr)
+{
+    char *st = get_name(arr, "##start");
+    char *en = get_name(arr, "##end");
+    int tot_fourm = my_getnbr(arr[0]);
+    for (int x = 0; rooms[x] != NULL; x++) {
+        if(my_strcmp(st, rooms[x]->name) == 0) {
+            rooms[x]->type = 1;
+            rooms[x]->fourmi = tot_fourm;
+            continue;
+        }
+        if(my_strcmp(en, rooms[x]->name) == 0) {
+            rooms[x]->type = 0;
+            continue;
+        }
+        rooms[x]->type = 2;
+    }
+}
+
+int lem_in(void)
 {
     // ./lem_in < anthill_trivial
     char **array = file_give_to_array();
     my_show_word_array(array);
     int imb_rooms;
     node_room **rooms = complete_according_to_file(array, &imb_rooms);
-
+    add_type(rooms, array);
+    for (int x = 0; rooms[x] != NULL; x++) {
+        printf("%s %d %d\n", rooms[x]->name, rooms[x]->type, rooms[x]->fourmi);
+    }
     free_my_arr(array);
-    // test_rooms();
-    return 0;
 }
 
 int main (int ac, char **av)
