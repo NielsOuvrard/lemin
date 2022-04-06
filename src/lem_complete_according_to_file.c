@@ -78,15 +78,9 @@ node_room **complete_according_to_file (char **file, int *nmb_rooms)
         else if (file_type == 2)
             break;
     }
-    my_printf("\nnmb de rooms : %d\n", (*nmb_rooms));
-    int connections = 0;
-    for (i = i; file[i]; i++) {
-        if ((file_type = is_a_tunnel(file[i]))) {
+    for (i = i; file[i]; i++)
+        if ((file_type = is_a_tunnel(file[i])))
             connect_node_with_str(all_rooms, file[i], (*nmb_rooms));
-            connections++;
-        }
-    }
-    my_printf("\nnmb de tunnels : %d\n", connections);
     return all_rooms;
 }
 

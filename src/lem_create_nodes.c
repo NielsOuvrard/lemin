@@ -23,7 +23,8 @@ node_room *new_node_empty (char *name, int x, int y)
 void new_tunnel (node_room *source, node_room *destination)
 {
     source->nmb_tunnels++;
-    node_room **tunnel_room_1 = malloc(sizeof(node_room *) * source->nmb_tunnels);
+    node_room **tunnel_room_1 = malloc(sizeof(node_room *) *
+    source->nmb_tunnels);
     for (int i = 0; i < source->nmb_tunnels - 1; i++)
         tunnel_room_1[i] = source->tunnel[i];
     tunnel_room_1[source->nmb_tunnels - 1] = destination;

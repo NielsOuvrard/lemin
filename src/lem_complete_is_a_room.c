@@ -49,10 +49,11 @@ int is_a_room (char *str)
         return 0;
     while (my_isdidgit(*str))
         str++;
-    if (str[0] && str[0] != '#' && str[0] != ' ')    // ? plutieurs espaces ...
+    if (str[0] && str[0] != '#' && str[0] != ' ')
         return 0;
     return 1;
 }
+// ? plutieurs espaces ...
 
 int is_a_tunnel (char *str)
 {

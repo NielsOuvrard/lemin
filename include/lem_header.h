@@ -43,6 +43,10 @@ int is_a_room (char *str);
 
 int is_a_tunnel (char *str);
 
+// disp infos
+
+void disp_all_infos_according_to_array (char **array);
+
 // create node
 
 node_room *new_node_empty (char *name, int x, int y);
