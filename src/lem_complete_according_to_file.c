@@ -73,20 +73,12 @@ node_room **complete_according_to_file (char **file)
     node_room **all_rooms = malloc(sizeof(node_room *));
     all_rooms[0] = NULL;
     int file_type;
-    my_printf("ok 1.1\n");
     for (i = 1; file[i]; i++) {
         if ((file_type = is_a_room(file[i])) == 1)
             all_rooms = add_room_in_list(all_rooms, file[i]);
         else if (file_type == 2)
             break;
     }
-    my_printf("ok 1.2\n");
-    my_printf("name de 0: %s\n", all_rooms[0] ? "YES" : "NO");
-
-    for (int j = 0; all_rooms[j]; j++) {
-        my_printf("name : %s\n", all_rooms[j]->name);
-    }
-
     for (i = i; file[i]; i++)
         if ((file_type = is_a_tunnel(file[i])))
             connect_node_with_str(all_rooms, file[i]);

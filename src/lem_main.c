@@ -32,12 +32,9 @@ int lem_in(void)
 {
     char **array = file_give_to_array();
     disp_all_infos_according_to_array(array);
-    my_printf("ok 1\n");
     node_room **rooms = complete_according_to_file(array);
-    my_printf("ok 2\n");
     add_type(rooms, array);
     dump_graph(rooms);
-
     free_alls_rooms(rooms);
     free_my_arr(array);
     return 0;
