@@ -21,31 +21,28 @@
 
 typedef struct node_room {
     int nmb_tunnels;
-    int type;
     struct node_room **tunnel;
     int fourmi;
     int pos_x;
     int pos_y;
     char *name;
+    int type;
 } node_room;
 
 // * ////////////// SRC DIR //////////////////////////////////////////
 
 // complete according to file
 
-node_room **complete_according_to_file (char **file, int *a);
+node_room **complete_according_to_file (char **file);
 
 // is a room
 
-node_room **add_room_in_list (node_room **list, char *str, int nmb_rooms);
+node_room **add_room_in_list (node_room **list, char *str);
+// node_room **add_room_in_list (node_room **list, char *str, int nmb_rooms);
 
 int is_a_room (char *str);
 
 int is_a_tunnel (char *str);
-
-// disp infos
-
-void disp_all_infos_according_to_array (char **array);
 
 // create node
 
@@ -55,13 +52,17 @@ void connect_node (node_room *room1, node_room *room2);
 
 void free_node_and_his_tunnels (node_room *room);
 
+// disp infos
+
+void disp_all_infos_according_to_array (char **array);
+
 // start end
 
 char *cur_name(char *str);
 
 char *get_name(char **arr, char *str);
 
-void add_type(node_room **rooms, char **arr, int nmb_room);
+void add_type(node_room **rooms, char **arr);
 
 // main
 

@@ -8,12 +8,15 @@
 #include "my.h"
 #include "lem_header.h"
 
-node_room **add_room_in_list (node_room **list, char *str, int nmb_rooms)
+node_room **add_room_in_list (node_room **list, char *str)
 {
-    node_room **new = malloc(sizeof(node_room *) * (nmb_rooms + 1));
-    for (int i = 0; i < nmb_rooms; i++)
-        new[i] = list[i];
+    int size = 0;
+    for (size = 0; list[size]; size++);
+    node_room **new = malloc(sizeof(node_room *) * (size + 2));
+    for (size = 0; list[size]; size++)
+        new[size] = list[size];
     free(list);
+    new[size + 1] = NULL;
     int size_name = my_strlen(str) + 1, x, y;
     char *name = malloc(sizeof(char) * size_name);
     my_memset(name, '\0', size_name - 1);
@@ -25,7 +28,7 @@ node_room **add_room_in_list (node_room **list, char *str, int nmb_rooms)
     while (my_isdidgit(*str))
         str++;
     y = my_getnbr(str);
-    new[nmb_rooms] = new_node_empty(name, x, y);
+    new[size] = new_node_empty(name, x, y);
     return new;
 }
 

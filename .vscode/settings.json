@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "lem_header.h": "c",
+        "uio.h": "c"
+    }
+}

@@ -8,19 +8,19 @@
 #include "my.h"
 #include "lem_header.h"
 
-void dump_graph (node_room **rooms, int nmb_rooms)
+void dump_graph (node_room **rooms)
 {
     my_printf("\n");
-    for (int x = 0; x < nmb_rooms; x++) {
+    for (int x = 0; rooms[x]; x++) {
         printf("name : %s\ttype : %d\tnmb fourmis : %d\t\tpos x-y : %d-%d\n",
         rooms[x]->name, rooms[x]->type, rooms[x]->fourmi,
         rooms[x]->pos_x, rooms[x]->pos_y);
     }
 }
 
-void free_alls_rooms (node_room **rooms, int nmb_rooms)
+void free_alls_rooms (node_room **rooms)
 {
-    for (int x = 0; x < nmb_rooms; x++) {
+    for (int x = 0; rooms[x]; x++) {
         free(rooms[x]->name);
         free(rooms[x]->tunnel);
         free(rooms[x]);
@@ -32,12 +32,13 @@ int lem_in(void)
 {
     char **array = file_give_to_array();
     disp_all_infos_according_to_array(array);
-    int nmb_rooms = 0;
-    node_room **rooms = complete_according_to_file(array, &nmb_rooms);
-    add_type(rooms, array, nmb_rooms);
-    dump_graph(rooms, nmb_rooms);
+    my_printf("ok 1\n");
+    node_room **rooms = complete_according_to_file(array);
+    my_printf("ok 2\n");
+    add_type(rooms, array);
+    dump_graph(rooms);
 
-    free_alls_rooms(rooms, nmb_rooms);
+    free_alls_rooms(rooms);
     free_my_arr(array);
     return 0;
 }

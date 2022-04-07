@@ -28,7 +28,7 @@ char *get_name(char **arr, char *str)
     return NULL;
 }
 
-void add_type(node_room **rooms, char **arr, int nmb_room)
+void add_type(node_room **rooms, char **arr)
 {
     char *start = get_name(arr, "##start");
     if (!start)
@@ -36,8 +36,8 @@ void add_type(node_room **rooms, char **arr, int nmb_room)
     char *end = get_name(arr, "##end");
     if (!end)
         return;
-    int tot_fourm = my_getnbr(arr[0]);
-    for (int x = 0; x < nmb_room; x++) {
+    int tot_fourm = my_getnbr(arr[0]), size;
+    for (int x = 0; rooms[x]; x++) {
         if (!my_strcmp(start, rooms[x]->name)) {
             rooms[x]->type = START;
             rooms[x]->fourmi = tot_fourm;
