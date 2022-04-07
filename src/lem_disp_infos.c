@@ -16,7 +16,7 @@ void disp_all_infos_2 (char *str)
         return;
     }
     for (int j = 0; str[j]; j++) {
-        if (str[j] == '#' && j > 0) {
+        if (j > 0 && str[j] == '#') {
             my_putchar('\n');
             return;
         } else if (str[j] == '#') {

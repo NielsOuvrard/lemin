@@ -12,8 +12,9 @@ void dump_graph (node_room **rooms, int nmb_rooms)
 {
     my_printf("\n");
     for (int x = 0; x < nmb_rooms; x++) {
-        printf("name : %s\ttype : %d\tnmb fourmis : %d\n",
-        rooms[x]->name, rooms[x]->type, rooms[x]->fourmi);
+        printf("name : %s\ttype : %d\tnmb fourmis : %d\t\tpos x-y : %d-%d\n",
+        rooms[x]->name, rooms[x]->type, rooms[x]->fourmi,
+        rooms[x]->pos_x, rooms[x]->pos_y);
     }
 }
 
