@@ -23,13 +23,26 @@ node_room **add_room_in_list (node_room **list, char *str)
     int i;
     for (i = 0; str[i] && str[i] != ' '; i++)
         name[i] = str[i];
-    str += i;
-    x = my_getnbr(str);
-    while (my_isdidgit(*str))
+    str += i + 1;
+    x = my_getnbr(str++);
+    while (!my_isdidgit(*str))
         str++;
     y = my_getnbr(str);
     new[size] = new_node_empty(name, x, y);
     return new;
+}
+
+int is_a_room_next (char *str)
+{
+    if (*str)
+        str++;
+    else
+        return 0;
+    while (my_isdidgit(*str))
+        str++;
+    if (str[0] && str[0] != '#' && str[0] != ' ')
+        return 0;
+    return 1;
 }
 
 int is_a_room (char *str)
@@ -46,15 +59,7 @@ int is_a_room (char *str)
         return 0;
     while (my_isdidgit(*str))
         str++;
-    if (*str)
-        str++;
-    else
-        return 0;
-    while (my_isdidgit(*str))
-        str++;
-    if (str[0] && str[0] != '#' && str[0] != ' ')
-        return 0;
-    return 1;
+    return is_a_room_next(str);
 }
 // ? plutieurs espaces ...
 
