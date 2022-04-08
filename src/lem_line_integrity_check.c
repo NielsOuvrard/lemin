@@ -8,7 +8,6 @@
 #include "lem_header.h"
 #include "my.h"
 
-
 int is_there_comment(char *line)
 {
     while (*line != 0 && *line == ' ')
