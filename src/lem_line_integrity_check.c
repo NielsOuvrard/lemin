@@ -27,52 +27,48 @@ int is_there_command(char *line)
 
 int check_tunnel_definition(char *line)
 {
+    int n = 0b000;
     if (*line == 0)
         return 0;
-    while (my_isalphanum(*line) && *line != 0)
-        line++;
+    for (; my_isalphanum(*line) && *line != 0; line++, n = n | 0b01);
     if (*line != '-')
         return 0;
     else
         line++;
-    while (my_isalphanum(*line) && *line != 0)
-        line++;
-    if (*line != 0 && !is_there_comment(line))
+    for (; my_isalphanum(*line) && *line != 0; line++, n = n | 0b10);
+    if ((*line != 0 && !is_there_comment(line)) || (n & 0b11) != 0b11)
         return 0;
     return 1;
 }
 
 int check_room_definition(char *line)
 {
+    int n = 0b000;
     if (*line == 0)
         return 0;
-    while (my_isalphanum(*line) && *line != 0)
-        line++;
+    for (; my_isalphanum(*line) && *line != 0; line++, n = n | 0b001);
     if (*line != ' ')
         return 0;
     else
         line++;
-    while (my_isdidgit(*line) && *line != 0)
-        line++;
+    for (; my_isdidgit(*line) && *line != 0; line++, n = n | 0b010);
     if (*line != ' ')
         return 0;
     else
         line++;
-    while (my_isdidgit(*line) && *line != 0)
-        line++;
-    if (*line != 0 && !is_there_comment(line))
+    for (; my_isdidgit(*line) && *line != 0; line++, n = n | 0b100);
+    if ((*line != 0 && !is_there_comment(line)) || (n & 0b111) != 0b111)
         return 0;
     return 1;
 }
 
 int check_ant_number(char *line)
 {
-    if (*line == 0) {
+    int n = 0b0;
+    if (*line == 0)
         return 0;
-    }
-    while (my_isdidgit(*line))
-        line++;
-    if (*line != 0 && !is_there_comment(line))
+    for (; my_isdidgit(*line); line++, n = n | 0b1);
+    if ((*line != 0 && !is_there_comment(line)) || (n & 0b1) != 0b1)
         return 0;
     return 1;
 }
