@@ -4,3 +4,4 @@ a.out
 vgcore*
 *.gc*
 lem_in
+.vscode
