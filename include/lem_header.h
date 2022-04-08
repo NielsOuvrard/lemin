@@ -19,6 +19,14 @@
 #define START 1
 #define NORMAL 2
 
+#define MYEOF         -2
+#define UNKNOWN     -1
+#define COMMAND     0
+#define COMMENT     1
+#define ROOM        2
+#define TUNNEL      3
+#define ANT         4
+
 typedef struct node_room {
     int nmb_tunnels;
     struct node_room **tunnel;
@@ -71,3 +79,22 @@ int main (int ac, char **av);
 // file give to array
 
 char **file_give_to_array ();
+
+// File integrity check (error gestion)
+int file_integrity_check(char **file);
+
+// Line integrity checks (error gestion)
+int is_there_command(char *line);
+int is_there_comment(char *line);
+int check_tunnel_definition(char *line);
+int check_room_definition(char *line);
+int check_ant_number(char *line);
+
+/**
+ * Returns -1 on unknown pattern
+ * Returns 0 if comment or command
+ * Returns 1 if room definition
+ * Returns 2 if move
+ * Returns 3 if number of ants
+*/
+int get_line_identity(char *line);
