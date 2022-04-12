@@ -25,7 +25,7 @@ int get_line_identity(char *line)
     return UNKNOWN;
 }
 
-int file_integrity_check2(char **file, int state, int start, int end)
+int file_integrity_check3(char **file, int state, int start, int end)
 {
     if (state != TUNNEL)
         return -1;
@@ -34,6 +34,24 @@ int file_integrity_check2(char **file, int state, int start, int end)
     if (state != MYEOF || (start != 1 || end != 1))
         return -1;
     return 0;
+}
+
+int file_integrity_check2(char **file, int state, int start, int end)
+{
+    while (state == COMMAND || state == COMMENT || state == ROOM) {
+        if (state == COMMAND && !my_strcmp(*file, "##start")) {
+            if (get_line_identity(file[1]) != ROOM)
+                return -1;
+            start++;
+        }
+        if (state == COMMAND && !my_strcmp(*file, "##end")) {
+            if (get_line_identity(file[1]) != ROOM)
+                return -1;
+            end++;
+        }
+        state = get_line_identity(*(++file));
+    }
+    return file_integrity_check3(file, state, start, end);
 }
 
 int file_integrity_check(char **file)
@@ -47,12 +65,5 @@ int file_integrity_check(char **file)
     if (state != ANT)
         return -1;
     state = get_line_identity(*(++file));
-    while (state == COMMAND || state == COMMENT || state == ROOM) {
-        if (state == COMMAND && !my_strcmp(*file, "##start"))
-            start++;
-        if (state == COMMAND && !my_strcmp(*file, "##end"))
-            end++;
-        state = get_line_identity(*(++file));
-    }
     return file_integrity_check2(file, state, start, end);
 }
