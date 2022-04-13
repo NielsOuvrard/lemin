@@ -35,7 +35,15 @@ typedef struct node_room {
     int pos_y;
     char *name;
     int type;
+    int visited;
+    int from;
 } node_room;
+
+struct ant {
+    int pos;
+    int path;
+    int number;
+};
 
 // * ////////////// SRC DIR //////////////////////////////////////////
 

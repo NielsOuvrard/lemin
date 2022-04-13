@@ -38,5 +38,5 @@ void disp_all_infos_according_to_array (char **array)
         }
         disp_all_infos_2(array[i]);
     }
-    my_putstr("#moves\n");
+    my_putstr("#moves");
 }
