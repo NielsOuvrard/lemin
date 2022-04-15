@@ -36,7 +36,7 @@ char **augmente_size_array (char **map, char *str)
     return array;
 }
 
-char **file_give_to_array ()
+char **file_give_to_array (void)
 {
     char **array = malloc(sizeof(char *));
     array[0] = NULL;
