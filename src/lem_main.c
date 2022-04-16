@@ -60,16 +60,21 @@ node_room **visit_room(node_room **rooms)
 node_room **find_paths(node_room **rooms, node_room **paths, int end,
 int start)
 {
-    while (rooms[end]->visited != 3)
+    int count_2 = 0, count = 0, size = 0, k = 0, j = 0;
+    for (; rooms[size]; size++);
+    while (rooms[end]->visited != 3) {
         rooms = visit_room(rooms);
-    int k = 0;
-    if (rooms[end]->visited == 3) {
-        for (int i = end; i != start; i = rooms[i]->from) {
+        for (j = 0, count = 0; rooms[j]; j++)
+            (rooms[j]->visited == 1 || rooms[j]->visited == 2) ? count ++ : 0;
+        (count == (size - 1)) ? count_2++ : 0;
+        if (count_2 > 2)
+            return NULL;
+    }
+    if (rooms[end]->visited == 3)
+        for (int i = end; i != start; i = rooms[i]->from, k++) {
             rooms[i]->visited = 2;
             paths[k] = rooms[i];
-            k++;
         }
-    }
     for (int x = 0; rooms[x]; x++)
         (rooms[x]->visited != 2 && x != start) ? rooms[x]->visited = 0 : 0;
     rooms[end]->visited = 0;
@@ -94,7 +99,7 @@ int *o_len_path)
         ant_list[i] = malloc(sizeof(struct ant));
         ant_list[i]->number = i + 1;
         search_lowest = -1;
-        for (int j = 0; j < rooms[start]->nmb_tunnels; j++) {
+        for (int j = 0; len_path[j] != -1; j++) {
             (len_path[j] < search_lowest || search_lowest == -1) ?
             lowest_pos = j : 0;
             (len_path[j] < search_lowest || search_lowest == -1) ?
@@ -126,12 +131,25 @@ void print_final(struct ant **ant_list, int *o_len_path, node_room ***paths)
     my_printf("\n");
 }
 
+void free_pathfinding(int *len_path, int *o_len_path, struct ant **ant_list)
+{
+    free(len_path);
+    free(o_len_path);
+    for (int i = 0; ant_list[i]; i++)
+        free(ant_list[i]);
+    free(ant_list);
+}
+
 void choose_path_and_display(node_room **rooms, int start, node_room ***paths)
 {
     int len = 0;
     int *len_path = malloc(sizeof(int) * (rooms[start]->nmb_tunnels + 1));
     int *o_len_path = malloc(sizeof(int) * (rooms[start]->nmb_tunnels + 1));
     for (int i = 0; i < rooms[start]->nmb_tunnels; i++) {
+        len_path[i] = -1;
+        o_len_path[i] = -1;
+        if (paths[i] == NULL)
+            continue;
         len = 0;
         for (; paths[i][len]; len++);
         len_path[i] = len + 1;
@@ -141,11 +159,7 @@ void choose_path_and_display(node_room **rooms, int start, node_room ***paths)
     o_len_path[rooms[start]->nmb_tunnels] = -1;
     struct ant **ant_list = creat_ant_list(rooms, start, len_path, o_len_path);
     print_final(ant_list, o_len_path, paths);
-    free(len_path);
-    free(o_len_path);
-    for (int i = 0; ant_list[i]; i++)
-        free(ant_list[i]);
-    free(ant_list);
+    free_pathfinding(len_path, o_len_path, ant_list);
 }
 
 void calc_and_dispaly(node_room **rooms, int start, int end, int size)
