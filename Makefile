@@ -22,6 +22,9 @@ all:
 
 clean:
 		rm -f *.o
+		rm -f *.gcno
+		rm -f *.gcda
+		rm -f tests_bin
 
 fclean: clean
 		rm lib/my/libmy.a
@@ -40,10 +43,10 @@ push:
 		@git push
 
 mac_del:
-		rm -R *.dSYM
-		rm -R .vscode
-		rm .DS_Store
-		rm src/.DS_Store
+		rm -Rf *.dSYM
+		rm -Rf .vscode
+		rm -f .DS_Store
+		rm -f src/.DS_Store
 
 vg_del:
 		rm vgcore.*
@@ -53,4 +56,14 @@ fm_push:
 		make mac_del
 		make push
 
-.PHONY: all clean fclean re push mac_del vg_del fm_push
+tests_run:
+		cp ./lib/my/my.h include/my.h
+		gcc -c lib/my/*.c
+		ar rc lib/my/libmy.a *.o
+		cp ./lib/my/libmy.a lib/libmy.a
+		gcc -o tests_bin -g tests/*.c $(SRC) $(LIB) -g3 -lcriterion --coverage
+		chmod 777 tests_bin
+		make clean
+
+
+.PHONY: all clean fclean re push mac_del vg_del fm_push tests_run
