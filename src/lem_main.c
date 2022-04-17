@@ -84,6 +84,7 @@ int start)
 
 void print_start_end(node_room **rooms, int start, int j)
 {
+    my_putchar('\n');
     for (int k = 1; k <= rooms[start]->fourmi; k++)
         my_printf("P%d-%s%c", k, rooms[start]->tunnel[j]->name,
         (k == rooms[start]->fourmi) ? '\n' : ' ');
