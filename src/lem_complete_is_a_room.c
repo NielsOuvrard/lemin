@@ -10,7 +10,7 @@
 
 node_room **add_room_in_list (node_room **list, char *str)
 {
-    int size = 0;
+    int size = 0, i;
     for (size = 0; list[size]; size++);
     node_room **new = malloc(sizeof(node_room *) * (size + 2));
     for (size = 0; list[size]; size++)
@@ -20,11 +20,12 @@ node_room **add_room_in_list (node_room **list, char *str)
     int size_name = my_strlen(str) + 1, x, y;
     char *name = malloc(sizeof(char) * size_name);
     my_memset(name, '\0', size_name - 1);
-    int i;
     for (i = 0; str[i] && str[i] != ' '; i++)
         name[i] = str[i];
     str += i + 1;
     x = my_getnbr(str++);
+    while (my_isdidgit(*str))
+        str++;
     while (!my_isdidgit(*str))
         str++;
     y = my_getnbr(str);

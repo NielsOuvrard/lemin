@@ -9,9 +9,10 @@
 #include "lem_header.h"
 
 char *cur_name(char *str)
-{   int x, w;
+{
+    int x, w;
     for (x = 0; str[x] != ' '; x++);
-    char *yes = malloc(sizeof (char) * (x + 1));
+    char *yes = malloc(sizeof(char) * (x + 1));
     for (w = 0; str[w] != ' '; w++)
         yes[w] = str[w];
     yes[w] = '\0';
@@ -26,6 +27,20 @@ char *get_name(char **arr, char *str)
         }
     }
     return NULL;
+}
+
+void end_st_samexy(node_room **rooms, char **arr)
+{
+    int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+    for (int x = 0; rooms[x]; x++) {
+        (rooms[x]->type == 1) ? x1 = rooms[x]->pos_x, y1 = rooms[x]->pos_y : 0;
+        (rooms[x]->type == 0) ? x2 = rooms[x]->pos_x, y2 = rooms[x]->pos_y : 0;
+    }
+    if (x1 == x2 && y1 == y2) {
+        free_alls_rooms (rooms);
+        free_my_arr(arr);
+        exit (84);
+    }
 }
 
 void add_type(node_room **rooms, char **arr)
@@ -49,4 +64,5 @@ void add_type(node_room **rooms, char **arr)
     }
     free(start);
     free(end);
+    end_st_samexy(rooms, arr);
 }

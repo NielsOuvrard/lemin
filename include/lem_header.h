@@ -83,6 +83,7 @@ void add_type(node_room **rooms, char **arr);
 // main
 
 int main (int ac, char **av);
+void free_alls_rooms (node_room **rooms);
 
 // file give to array
 
