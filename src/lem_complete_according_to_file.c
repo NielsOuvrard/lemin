@@ -35,11 +35,11 @@ node_room *room1_fun (node_room **all_rooms, char **str, int size_str)
 node_room *room2_fun (node_room **all_rooms, char *str, int size_str)
 {
     char *room2_name = malloc(sizeof(char) * size_str);
-    int i = 0, size;
+    int size;
     my_memset(room2_name, '\0', size_str);
     for (size = 0; all_rooms[size]; size++);
-    for (int j = 0; str[j] && str[j] != '-'; j++)
-        room2_name[i] = str[j];
+    for (int j = 0; str[j]; j++)
+        room2_name[j] = str[j];
     node_room *room2 = NULL;
     for (int a = 0; a < size; a++) {
         if (!my_strvcmp(room2_name, all_rooms[a]->name)) {
@@ -76,13 +76,12 @@ node_room **complete_according_to_file (char **file)
     for (i = 1; file[i]; i++) {
         if ((file_type = is_a_room(file[i])) == 1)
             all_rooms = add_room_in_list(all_rooms, file[i]);
-        else if (file_type == 2)
+        if (file_type == 2)
             break;
     }
-    for (i = i; file[i]; i++)
+    for (i; file[i]; i++) {
         if ((file_type = is_a_tunnel(file[i])))
             connect_node_with_str(all_rooms, file[i]);
+    }
     return all_rooms;
 }
-
-// TODO verif que 2 rooms n'aient pas le même nom

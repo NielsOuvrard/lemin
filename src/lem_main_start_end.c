@@ -39,7 +39,7 @@ void end_st_samexy(node_room **rooms, char **arr)
     if (x1 == x2 && y1 == y2) {
         free_alls_rooms (rooms);
         free_my_arr(arr);
-        exit (84);
+        exit(84);
     }
 }
 

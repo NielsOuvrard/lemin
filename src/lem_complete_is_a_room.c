@@ -22,6 +22,7 @@ node_room **add_room_in_list (node_room **list, char *str)
     my_memset(name, '\0', size_name - 1);
     for (i = 0; str[i] && str[i] != ' '; i++)
         name[i] = str[i];
+    // my_printf("le name : %s\n", name);
     str += i + 1;
     x = my_getnbr(str++);
     while (my_isdidgit(*str))
@@ -50,7 +51,7 @@ int is_a_room (char *str)
 {
     if (str[0] == '#')
         return 0;
-    while (my_isdidgit(*str))
+    while (str[0] && str[0] != ' ' && str[0] != '-')
         str++;
     if (str[0] == '-')
         return 2;
