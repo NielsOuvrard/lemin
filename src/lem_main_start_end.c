@@ -43,20 +43,6 @@ void end_st_samexy(node_room **rooms, char **arr)
     }
 }
 
-int connected_start_end(node_room *se)
-{
-    se->visited = 1;
-    if(se->type == 0)
-        return 1;
-    for (int x = 0; se->tunnel[x] != NULL; x++) {
-        if(se->tunnel[x]->visited != 1) {
-            if(connected_start_end(se->tunnel[x]) == 1)
-                return 1;
-        }
-    }
-    return 0;
-}
-
 void add_type(node_room **rooms, char **arr)
 {
     char *start = get_name(arr, "##start");
@@ -79,14 +65,5 @@ void add_type(node_room **rooms, char **arr)
 
     free(start);
     free(end);
-
-    int x = 0;
-    for(; rooms[x] != NULL && rooms[x]->type != 1; x++);
-    node_room *se = rooms[x];
-    if(connected_start_end(se) == 0) {
-        free_alls_rooms (rooms);
-        free_my_arr(arr);
-        exit (84);
-    }
     end_st_samexy(rooms, arr);
 }
