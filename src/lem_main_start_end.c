@@ -62,7 +62,6 @@ void add_type(node_room **rooms, char **arr)
             rooms[x]->type = NORMAL;
         }
     }
-
     free(start);
     free(end);
     end_st_samexy(rooms, arr);

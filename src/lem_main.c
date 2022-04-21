@@ -60,13 +60,13 @@ node_room **visit_room(node_room **rooms)
 node_room **find_paths(node_room **rooms, node_room **paths, int end,
 int start)
 {
-    int count_2 = 0, count = 0, size = 0, k = 0, j = 0;
+    int count_2 = 0, count = 0, size = 0, k = 0, j = 0, old_count = 0;
     for (; rooms[size]; size++);
     while (rooms[end]->visited != 3) {
         rooms = visit_room(rooms);
-        for (j = 0, count = 0; rooms[j]; j++)
-            (rooms[j]->visited == 1 || rooms[j]->visited == 2) ? count ++ : 0;
-        (count == (size - 1)) ? count_2++ : 0;
+        for (j = 0, old_count = count, count = 0; rooms[j]; j++)
+            (rooms[j]->visited == 1 || rooms[j]->visited == 2) ? count++ : 0;
+        (count == old_count) ? count_2++ : 0;
         if (count_2 > 2)
             return NULL;
     }
@@ -163,7 +163,7 @@ void choose_path_and_display(node_room **rooms, int start, node_room ***paths)
     free_pathfinding(len_path, o_len_path, ant_list);
 }
 
-void calc_and_dispaly(node_room **rooms, int start, int end, int size)
+int calc_and_dispaly(node_room **rooms, int start, int end, int size)
 {
     node_room ***paths = malloc(sizeof(node_room **) *
     (rooms[start]->nmb_tunnels + 1));
@@ -177,14 +177,17 @@ void calc_and_dispaly(node_room **rooms, int start, int end, int size)
     rooms[start]->visited = 4;
     for (int a = 0; a < rooms[start]->nmb_tunnels; a++)
         paths[a] = find_paths(rooms, paths[a], end, start);
+    if (paths[0] == NULL)
+        return 84;
     paths = my_revpath(paths);
     choose_path_and_display(rooms, start, paths);
     for (int j = 0; j < rooms[start]->nmb_tunnels; j++)
         free(paths[j]);
     free(paths);
+    return 0;
 }
 
-void do_pathfinding(node_room **rooms)
+int do_pathfinding(node_room **rooms)
 {
     int start = 0, end = 0, size = 0;
     for (int x = 0; rooms[x]; x++) {
@@ -197,24 +200,27 @@ void do_pathfinding(node_room **rooms)
     for (int j = 0; j < rooms[start]->nmb_tunnels; j++)
         if (rooms[start]->tunnel[j]->type == 0) {
             print_start_end(rooms, start, j);
-            return;
+            return 0;
         }
-    calc_and_dispaly(rooms, start, end, size);
-    return;
+    if (calc_and_dispaly(rooms, start, end, size))
+        return 84;
+    return 0;
 }
 
 int lem_in(void)
 {
+    int return_value = 0;
     char **array = file_give_to_array();
     if (file_integrity_check(array) == -1)
         return 84;
     disp_all_infos_according_to_array(array);
     node_room **rooms = complete_according_to_file(array);
     add_type(rooms, array);
-    do_pathfinding(rooms);
+    if (return_value = do_pathfinding(rooms))
+        my_putchar('\n');
     free_alls_rooms(rooms);
     free_my_arr(array);
-    return 0;
+    return return_value;
 }
 
 int main (int ac, char **av)
