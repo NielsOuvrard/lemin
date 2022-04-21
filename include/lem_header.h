@@ -19,7 +19,7 @@
 #define START 1
 #define NORMAL 2
 
-#define MYEOF         -2
+#define MYEOF       -2
 #define UNKNOWN     -1
 #define COMMAND     0
 #define COMMENT     1

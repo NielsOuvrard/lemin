@@ -208,7 +208,6 @@ int lem_in(void)
     char **array = file_give_to_array();
     if (file_integrity_check(array) == -1)
         return 84;
-    disp_all_infos_according_to_array(array);
     node_room **rooms = complete_according_to_file(array);
     add_type(rooms, array);
     do_pathfinding(rooms);
