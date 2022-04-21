@@ -63,6 +63,7 @@ tests_run:
 		cp ./lib/my/libmy.a lib/libmy.a
 		gcc -o tests_bin -g tests/*.c $(SRC) $(LIB) -g3 -lcriterion --coverage
 		chmod 777 tests_bin
+		./tests_bin < input
 		make clean
 
 
