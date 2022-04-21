@@ -84,3 +84,7 @@ int my_strlen(char const *str);
 char *my_strupcase(char *str);
 
 int my_unsintlen (unsigned int nbr);
+
+int my_in_str(char intruder, const char *selection);
+
+char *my_trimchar(char *str, const char *trailing_char, char mode);
