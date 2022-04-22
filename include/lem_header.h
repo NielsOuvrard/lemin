@@ -107,3 +107,18 @@ int check_ant_number(char *line);
  * Returns 3 if number of ants
 */
 int get_line_identity(char *line);
+
+// Pathfinding function
+
+node_room ***my_revpath(node_room ***paths);
+node_room **visit_room(node_room **rooms);
+node_room **find_paths(node_room **rooms, node_room **paths, int end,
+int start);
+void print_start_end(node_room **rooms, int start, int j);
+struct ant **creat_ant_list(node_room **rooms, int start, int *len_path,
+int *o_len_path);
+void print_final(struct ant **ant_list, int *o_len_path, node_room ***paths);
+void free_pathfinding(int *len_path, int *o_len_path, struct ant **ant_list);
+void choose_path_and_display(node_room **rooms, int start, node_room ***paths);
+int calc_and_dispaly(node_room **rooms, int start, int end, int size);
+int do_pathfinding(node_room **rooms);
