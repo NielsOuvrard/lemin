@@ -25,7 +25,8 @@ int lem_in(void)
     if (file_integrity_check(array) == -1)
         return 84;
     node_room **rooms = complete_according_to_file(array);
-    add_type(rooms, array);
+    if (add_type(rooms, array) == -1)
+        return 84;
     if (return_value = do_pathfinding(rooms))
         my_putchar('\n');
     free_alls_rooms(rooms);

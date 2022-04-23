@@ -78,7 +78,7 @@ char *cur_name(char *str);
 
 char *get_name(char **arr, char *str);
 
-void add_type(node_room **rooms, char **arr);
+int add_type(node_room **rooms, char **arr);
 
 // main
 
