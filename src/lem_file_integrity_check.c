@@ -55,16 +55,16 @@ int file_integrity_check3(char **file, int state, int start, int end)
 int file_integrity_check2(char **file, int state, int start, int end)
 {
     while (state == COMMAND || state == COMMENT || state == ROOM) {
-        if (state == COMMAND && !my_strcmp(*file, "##start")) {
+        int test_start = state == COMMAND && !my_strcmp(*file, "##start");
+        int test_end = state == COMMAND && !my_strcmp(*file, "##end");
+        if (test_start)
             my_printf("##start\n");
-            if (get_line_identity(file[1]) != ROOM || ++start > 1)
-                return -1;
-        }
-        if (state == COMMAND && !my_strcmp(*file, "##end")) {
+        if (test_start && (get_line_identity(file[1]) != ROOM || ++start > 1))
+            return -1;
+        if (test_end)
             my_printf("##end\n");
-            if (get_line_identity(file[1]) != ROOM || ++end > 1)
-                return -1;
-        }
+        if (test_end && (get_line_identity(file[1]) != ROOM || ++end > 1))
+            return -1;
         if (state == ROOM)
             my_print_until(*file, '#', true);
         state = get_line_identity(*(++file));
