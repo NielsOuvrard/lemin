@@ -100,11 +100,11 @@ int check_room_definition(char *line);
 int check_ant_number(char *line);
 
 /**
- * Returns -1 on unknown pattern
- * Returns 0 if comment or command
- * Returns 1 if room definition
- * Returns 2 if move
- * Returns 3 if number of ants
+* Returns -1 on unknown pattern
+* Returns 0 if comment or command
+* Returns 1 if room definition
+* Returns 2 if move
+* Returns 3 if number of ants
 */
 int get_line_identity(char *line);
 

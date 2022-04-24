@@ -38,10 +38,3 @@ int main (int ac, char **av)
 {
     return lem_in();
 }
-
-// * mettre NULL à la fin
-// check si il y a un iquement le nombre de fourmi / same for the room list
-// check si chemin existe
-// check qu'il n'y ai pas de merde au milieu
-// (penser à afficher tous ce qui est valide avant)
-// si pas de liaisons affiché tout sauf la partie #moves

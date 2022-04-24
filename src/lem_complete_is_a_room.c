@@ -61,7 +61,6 @@ int is_a_room (char *str)
         str++;
     return is_a_room_next(str);
 }
-// ? plutieurs espaces ...
 
 int is_a_tunnel (char *str)
 {
