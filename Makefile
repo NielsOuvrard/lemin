@@ -66,5 +66,4 @@ tests_run:
 		./tests_bin < input
 		make clean
 
-
 .PHONY: all clean fclean re push mac_del vg_del fm_push tests_run

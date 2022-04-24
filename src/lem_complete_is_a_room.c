@@ -22,15 +22,13 @@ node_room **add_room_in_list (node_room **list, char *str)
     my_memset(name, '\0', size_name - 1);
     for (i = 0; str[i] && str[i] != ' '; i++)
         name[i] = str[i];
-    // my_printf("le name : %s\n", name);
     str += i + 1;
     x = my_getnbr(str++);
     while (my_isdidgit(*str))
         str++;
     while (!my_isdidgit(*str))
         str++;
-    y = my_getnbr(str);
-    new[size] = new_node_empty(name, x, y);
+    new[size] = new_node_empty(name, x, my_getnbr(str));
     return new;
 }
 
